@@ -51,10 +51,10 @@ function BlogPostPage() {
     <div className="px-8 py-20 max-w-2xl mx-auto">
       <Link to="/blog" className="text-sm text-gray-400">← All posts</Link>
       <p className="text-xs tracking-widest text-gray-400 mt-6 mb-2">{post.category}</p>
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <h1 className="font-display text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-xs text-gray-400 mb-8">{post.date} · {post.readTime}</p>
 
-      <div className="bg-gray-50 h-72 rounded-2xl flex items-center justify-center text-gray-300 mb-8">
+      <div className="bg-cream-dark h-72 rounded-2xl flex items-center justify-center text-gray-300 mb-8">
         Image
       </div>
 

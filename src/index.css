@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-cream: #f3f1ea;
+  --color-cream-dark: #ebe8df;
+  --color-ink: #1c1a17;
+  --color-clay: #c1683f;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}

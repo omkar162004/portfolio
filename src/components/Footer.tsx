@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="border-t border-gray-200 px-8 py-12 mt-20">
+    <footer className="border-t border-[#ddd9cd] px-8 py-12 mt-20">
       <div className="flex justify-between">
         <div>
           <h3 className="text-xl font-bold">
@@ -33,7 +33,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-between text-xs text-gray-400 mt-12 pt-6 border-t border-gray-200">
+      <div className="flex justify-between text-xs text-gray-400 mt-12 pt-6 border-t border-[#ddd9cd]">
         <p>© 2026 Aarav Mehta. All rights reserved.</p>
         <p>Bengaluru, India</p>
       </div>

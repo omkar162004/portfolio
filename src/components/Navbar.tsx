@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 function Navbar() {
   return (
-    <header className="flex items-center justify-between px-8 py-5 border-b border-gray-200">
+    <header className="flex items-center justify-between px-8 py-5 border-b border-[#ddd9cd]">
       <div className="text-xl font-bold">
         Aarav<span className="text-orange-600">.</span>
       </div>
@@ -16,7 +16,7 @@ function Navbar() {
 
       <Link
         to="/contact"
-        className="bg-black text-white text-sm px-5 py-2 rounded-full"
+        className="bg-ink text-white text-sm px-5 py-2 rounded-full"
 >       Contact me
       </Link>
     </header>

@@ -52,7 +52,7 @@ function ProjectDetailPage() {
   return (
     <div className="px-8 py-20 max-w-3xl mx-auto">
       <p className="text-xs tracking-widest text-gray-400 mb-2">{project.category}</p>
-      <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
+      <h1 className="font-display text-4xl font-bold mb-4">{project.title}</h1>
       <p className="text-gray-500 mb-6">{project.description}</p>
 
       <div className="flex gap-2 mb-10">
@@ -63,7 +63,7 @@ function ProjectDetailPage() {
         ))}
       </div>
 
-      <div className="bg-gray-50 h-72 rounded-2xl flex items-center justify-center text-gray-300 mb-10">
+      <div className="bg-cream-dark h-72 rounded-2xl flex items-center justify-center text-gray-300 mb-10">
         Image
       </div>
 
