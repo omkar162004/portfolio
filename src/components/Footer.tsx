@@ -4,7 +4,7 @@ function Footer() {
       <div className="flex justify-between">
         <div>
           <h3 className="text-xl font-bold">
-            Aarav Mehta<span className="text-orange-600">.</span>
+            Omkar Mahtole<span className="text-orange-600">.</span>
           </h3>
           <p className="text-sm text-gray-500 mt-2 max-w-xs">
             Building intelligent systems, one experiment at a time.

@@ -23,7 +23,7 @@ function ContactPage() {
   }
 
   return (
-    <div className="px-8 py-20 grid grid-cols-2 gap-12">
+    <div className="px-8 py-20 grid grid-cols-1 md:grid-cols-2 gap-12">
       <div>
         <p className="text-xs tracking-widest text-gray-400 mb-2">CONTACT</p>
         <h1 className="font-display text-5xl font-bold mb-6">Let's talk.</h1>

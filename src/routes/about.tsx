@@ -12,7 +12,7 @@ function AboutPage() {
             Curious about how data becomes decisions.
           </h1>
           <p className="text-gray-500 mt-6 max-w-md">
-            Hi, I'm Aarav — an ai / ml engineering student based in Bengaluru,
+            Hi, I'm Omkar — an ai / ml engineering student based in Chhatrapati Sambhaji Nagar,
             India. I spend most of my time training models, reading papers,
             and turning rough ideas into working prototypes.
           </p>
@@ -38,7 +38,7 @@ function AboutPage() {
           </div>
           <div>
             <p className="text-xs tracking-widest text-gray-400 mb-2">BASED IN</p>
-            <p className="font-medium">Bengaluru, India</p>
+            <p className="font-medium">Chhatrapati Sambhajinagar, India</p>
           </div>
           <div>
             <p className="text-xs tracking-widest text-gray-400 mb-2">FOCUS</p>
