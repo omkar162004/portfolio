@@ -1,4 +1,7 @@
 import { createRoute, useParams, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { doc, getDoc, setDoc, increment } from "firebase/firestore";
+import { db } from "../firebase";
 import { rootRoute } from "./root";
 
 const projects = [
@@ -38,8 +41,34 @@ function ProjectDetailPage() {
   const { slug } = useParams({ from: "/projects/$slug" });
   const project = projects.find((p) => p.slug === slug);
 
-  // Guard clause: if no project matches this slug (bad URL, typo, etc.),
-  // show a fallback instead of crashing trying to read properties of undefined.
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  useEffect(() => {
+    async function loadLikes() {
+      const likeDoc = await getDoc(doc(db, "projectLikes", slug));
+      setLikes(likeDoc.exists() ? likeDoc.data().count : 0);
+
+      const liked = localStorage.getItem(`liked-project-${slug}`) === "true";
+      setHasLiked(liked);
+    }
+    loadLikes();
+  }, [slug]);
+
+  async function toggleLike() {
+    const newHasLiked = !hasLiked;
+    setHasLiked(newHasLiked);
+    setLikes(newHasLiked ? likes + 1 : likes - 1);
+
+    localStorage.setItem(`liked-project-${slug}`, String(newHasLiked));
+
+    await setDoc(
+      doc(db, "projectLikes", slug),
+      { count: increment(newHasLiked ? 1 : -1) },
+      { merge: true }
+    );
+  }
+
   if (!project) {
     return (
       <div className="px-8 py-20 text-center">
@@ -65,6 +94,16 @@ function ProjectDetailPage() {
 
       <div className="bg-cream-dark h-72 rounded-2xl flex items-center justify-center text-gray-300 mb-10">
         Image
+      </div>
+
+      {/* Likes */}
+      <div className="flex items-center gap-6 border-t border-b border-[#ddd9cd] py-4 mb-10 text-sm text-gray-500">
+        <button
+          onClick={toggleLike}
+          className={hasLiked ? "flex items-center gap-1.5 text-clay" : "flex items-center gap-1.5"}
+        >
+          {hasLiked ? "♥" : "♡"} {likes} Likes
+        </button>
       </div>
 
       <Link to="/projects" className="text-sm underline">

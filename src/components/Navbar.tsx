@@ -6,20 +6,20 @@ function Navbar() {
 
   return (
     <header className="relative px-8 py-5 border-b border-[#ddd9cd]">
-      <div className="flex items-center justify-between">
+      <div className="grid grid-cols-[auto_1fr_auto] items-center gap-8">
         <div className="text-xl font-bold font-display">
           Omkar<span className="text-clay">.</span>
         </div>
 
         {/* Desktop links — hidden on mobile */}
-        <nav className="hidden md:flex gap-8 text-sm">
+        <nav className="hidden md:flex justify-center gap-8 text-sm">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/projects">Projects</Link>
           <Link to="/blog">Blogs</Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-end">
           <Link
             to="/contact"
             className="hidden md:inline-block bg-ink text-white text-sm px-5 py-2 rounded-full"

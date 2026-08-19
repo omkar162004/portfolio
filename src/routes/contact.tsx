@@ -1,5 +1,7 @@
 import { createRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 import { rootRoute } from "./root";
 
 function ContactPage() {
@@ -8,6 +10,8 @@ function ContactPage() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData({
@@ -16,10 +20,20 @@ function ContactPage() {
     });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Submitted:", formData);
-    alert("Message sent! (check the browser console)");
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    await addDoc(collection(db, "contactMessages"), {
+      ...formData,
+      submittedAt: new Date().toISOString(),
+    });
+
+    setIsSubmitting(false);
+    setSubmitted(true);
+    setFormData({ name: "", email: "", message: "" });
   }
 
   return (
@@ -34,43 +48,60 @@ function ContactPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="border border-[#ddd9cd] rounded-2xl p-8">
-        <label className="block text-sm mb-4">
-          Name
-          <input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
-            placeholder="Jane Doe"
-          />
-        </label>
+        {submitted ? (
+          <div className="text-center py-10">
+            <p className="font-display text-2xl font-bold mb-2">Message sent!</p>
+            <p className="text-sm text-gray-500">Thanks for reaching out — I'll reply soon.</p>
+          </div>
+        ) : (
+          <>
+            <label className="block text-sm mb-4">
+              Name
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
+                placeholder="Jane Doe"
+              />
+            </label>
 
-        <label className="block text-sm mb-4">
-          Email
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
-            placeholder="jane@example.com"
-          />
-        </label>
+            <label className="block text-sm mb-4">
+              Email
+              <input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
+                placeholder="jane@example.com"
+              />
+            </label>
 
-        <label className="block text-sm mb-4">
-          Message
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={5}
-            className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
-            placeholder="Tell me a little about what you have in mind..."
-          />
-        </label>
+            <label className="block text-sm mb-4">
+              Message
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="w-full border border-[#ddd9cd] rounded-lg px-4 py-2.5 mt-1 text-sm"
+                placeholder="Tell me a little about what you have in mind..."
+              />
+            </label>
 
-        <button type="submit" className="w-full bg-ink text-white py-3 rounded-lg text-sm">
-          Send message
-        </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-ink text-white py-3 rounded-lg text-sm disabled:opacity-50"
+            >
+              {isSubmitting ? "Sending..." : "Send message"}
+            </button>
+          </>
+        )}
       </form>
     </div>
   );
