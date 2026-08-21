@@ -1,5 +1,6 @@
-const modules = import.meta.glob("./posts/*.ts", { eager: true });
+const modules = import.meta.glob("./posts/*.tsx", { eager: true });
 
-export const posts = Object.values(modules).map(
-  (mod: any) => mod.default
-);
+export const posts = Object.values(modules).map((mod: any) => ({
+  ...mod.meta,
+  Component: mod.default,
+}));
