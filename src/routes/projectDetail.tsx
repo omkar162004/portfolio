@@ -70,8 +70,10 @@ function ProjectDetailPage() {
         Image
       </div>
 
+      <project.Component />
+
       {/* Likes */}
-      <div className="flex items-center gap-6 border-t border-b border-[#ddd9cd] py-4 mb-10 text-sm text-gray-500">
+      <div className="flex items-center gap-6 border-t border-b border-[#ddd9cd] py-4 mt-10 mb-10 text-sm text-gray-500">
         <button
           onClick={toggleLike}
           className={hasLiked ? "flex items-center gap-1.5 text-clay" : "flex items-center gap-1.5"}

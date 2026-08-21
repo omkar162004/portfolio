@@ -93,7 +93,7 @@ function BlogPostPage() {
         Image
       </div>
 
-      <p className="text-gray-600 leading-relaxed whitespace-pre-line">{post.content}</p>
+      <post.Component />
 
       {/* Likes */}
       <div className="flex items-center gap-6 border-t border-b border-[#ddd9cd] py-4 my-10 text-sm text-gray-500">
