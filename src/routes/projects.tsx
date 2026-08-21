@@ -1,33 +1,7 @@
 import { createRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { rootRoute } from "./root";
-
-const projects = [
-  {
-    slug: "real-time-defect-detection",
-    title: "Real-time Defect Detection",
-    category: "COMPUTER VISION",
-    year: "2025",
-    description: "A lightweight CNN that flags surface defects from a live camera feed.",
-    tags: ["PyTorch", "OpenCV", "ONNX", "FastAPI"],
-  },
-  {
-    slug: "abstractive-summarizer",
-    title: "Abstractive Summarizer",
-    category: "NLP",
-    year: "2025",
-    description: "A fine-tuned T5 model that turns transcripts into clean summaries.",
-    tags: ["Hugging Face", "T5", "FastAPI", "Docker"],
-  },
-  {
-    slug: "hybrid-movie-recommender",
-    title: "Hybrid Movie Recommender",
-    category: "RECOMMENDER",
-    year: "2024",
-    description: "A hybrid recommender combining matrix factorization with content embeddings.",
-    tags: ["scikit-learn", "Pandas", "Streamlit"],
-  },
-];
+import { projects } from "../content/loadProjects";
 
 const allTags = ["All", ...new Set(projects.flatMap((p) => p.tags))];
 
@@ -92,7 +66,7 @@ function ProjectsPage() {
             <h3 className="font-display text-xl font-bold mb-2">{project.title}</h3>
             <p className="text-sm text-gray-500 mb-4">{project.description}</p>
             <div className="flex flex-wrap gap-2 mb-4">
-              {project.tags.map((tag) => (
+              {project.tags.map((tag:string) => (
                 <span key={tag} className="bg-gray-100 text-xs px-3 py-1 rounded-full">
                   {tag}
                 </span>

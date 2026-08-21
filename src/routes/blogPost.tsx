@@ -3,33 +3,7 @@ import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, query, where, doc, getDoc, setDoc, increment } from "firebase/firestore";
 import { db } from "../firebase";
 import { rootRoute } from "./root";
-
-const posts = [
-  {
-    slug: "gradient-descent",
-    category: "Fundamentals",
-    title: "The Intuition Behind Gradient Descent",
-    excerpt: "Forget the calculus for a second. Here's how I finally understood why models learn by walking downhill.",
-    date: "May 12, 2026",
-    readTime: "6 min read",
-  },
-  {
-    slug: "attention-explained",
-    category: "NLP",
-    title: "Attention, Explained Like I'm Five",
-    excerpt: "Transformers power almost everything now. Here's the core idea — attention — without the scary notation.",
-    date: "April 2, 2026",
-    readTime: "8 min read",
-  },
-  {
-    slug: "reproducible-ml-workflow",
-    category: "MLOps",
-    title: "My Reproducible ML Experiment Workflow",
-    excerpt: "The boring habits — config files, seeds, and logging — that saved me from countless 'it worked yesterday' moments.",
-    date: "February 18, 2026",
-    readTime: "5 min read",
-  },
-];
+import { posts } from "../content/loadPosts";
 
 export const blogPostRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -52,13 +26,11 @@ function BlogPostPage() {
 
   useEffect(() => {
     async function loadData() {
-      // Load comments
       const q = query(collection(db, "blogComments"), where("postSlug", "==", slug));
       const snapshot = await getDocs(q);
       const loadedComments = snapshot.docs.map((doc) => doc.data() as { name: string; text: string });
       setComments(loadedComments);
 
-      // Load likes
       const likeDoc = await getDoc(doc(db, "postLikes", slug));
       setLikes(likeDoc.exists() ? likeDoc.data().count : 0);
 
@@ -121,11 +93,7 @@ function BlogPostPage() {
         Image
       </div>
 
-      <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
-      <p className="text-gray-600 leading-relaxed mt-4">
-        The rest of your full post content goes here — replace this with your
-        real writing.
-      </p>
+      <p className="text-gray-600 leading-relaxed whitespace-pre-line">{post.content}</p>
 
       {/* Likes */}
       <div className="flex items-center gap-6 border-t border-b border-[#ddd9cd] py-4 my-10 text-sm text-gray-500">

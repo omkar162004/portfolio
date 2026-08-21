@@ -3,33 +3,7 @@ import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc, increment } from "firebase/firestore";
 import { db } from "../firebase";
 import { rootRoute } from "./root";
-
-const projects = [
-  {
-    slug: "real-time-defect-detection",
-    title: "Real-time Defect Detection",
-    category: "COMPUTER VISION",
-    year: "2025",
-    description: "A lightweight CNN that flags surface defects from a live camera feed in under 30ms per frame, deployed on edge hardware.",
-    tags: ["PyTorch", "OpenCV", "ONNX", "FastAPI"],
-  },
-  {
-    slug: "abstractive-summarizer",
-    title: "Abstractive Summarizer",
-    category: "NLP",
-    year: "2025",
-    description: "A fine-tuned T5 model that turns long lecture transcripts into clean, readable summaries — with a tiny FastAPI service around it.",
-    tags: ["Hugging Face", "T5", "FastAPI", "Docker"],
-  },
-  {
-    slug: "hybrid-movie-recommender",
-    title: "Hybrid Movie Recommender",
-    category: "RECOMMENDER",
-    year: "2024",
-    description: "A hybrid recommender combining matrix factorization with content embeddings to serve cold-start friendly suggestions.",
-    tags: ["scikit-learn", "Pandas", "Streamlit"],
-  },
-];
+import { projects } from "../content/loadProjects";
 
 export const projectDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -85,7 +59,7 @@ function ProjectDetailPage() {
       <p className="text-gray-500 mb-6">{project.description}</p>
 
       <div className="flex gap-2 mb-10">
-        {project.tags.map((tag) => (
+        {project.tags.map((tag: string) => (
           <span key={tag} className="bg-gray-100 text-xs px-3 py-1 rounded-full">
             {tag}
           </span>

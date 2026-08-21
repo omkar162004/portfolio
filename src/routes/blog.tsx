@@ -1,33 +1,7 @@
 import { createRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { rootRoute } from "./root";
-
-const posts = [
-  {
-    slug: "gradient-descent",
-    category: "Fundamentals",
-    title: "The Intuition Behind Gradient Descent",
-    excerpt: "Forget the calculus for a second. Here's how I finally understood why models learn by walking downhill.",
-    date: "May 12, 2026",
-    readTime: "6 min read",
-  },
-  {
-    slug: "attention-explained",
-    category: "NLP",
-    title: "Attention, Explained Like I'm Five",
-    excerpt: "Transformers power almost everything now. Here's the core idea — attention — without the scary notation.",
-    date: "April 2, 2026",
-    readTime: "8 min read",
-  },
-  {
-    slug: "reproducible-ml-workflow",
-    category: "MLOps",
-    title: "My Reproducible ML Experiment Workflow",
-    excerpt: "The boring habits — config files, seeds, and logging — that saved me from countless 'it worked yesterday' moments.",
-    date: "February 18, 2026",
-    readTime: "5 min read",
-  },
-];
+import { posts } from "../content/loadPosts";
 
 const allCategories = ["All", ...new Set(posts.map((p) => p.category))];
 
